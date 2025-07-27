@@ -1,0 +1,33 @@
+#!/bin/bash
+close_dash() {
+    $HOME/.config/eww/./toggle_dashboard.sh 
+}
+
+if [[ "$1" == "--ff" ]]; then
+	close_dash && firefox &
+
+elif [[ "$1" == "--tg" ]]; then
+	close_dash && telegram-desktop &
+
+elif [[ "$1" == "--dc" ]]; then
+	close_dash && discord &
+
+elif [[ "$1" == "--tr" ]]; then
+	close_dash && alacritty --working-directory ~ &
+
+elif [[ "$1" == "--fm" ]]; then
+	close_dash && nautilus ~ &
+
+elif [[ "$1" == "--ge" ]]; then
+	close_dash && geany &
+
+elif [[ "$1" == "--cd" ]]; then
+	close_dash && nvim &
+
+elif [[ "$1" == "--gp" ]]; then
+	close_dash && gimp &
+
+elif [[ "$1" == "--vb" ]]; then
+	close_dash && virtualbox &
+
+fi

@@ -1,0 +1,112 @@
+#!/bin/bash
+
+COVER="/tmp/.music_cover.jpg"
+FALLBACK_COVER="$HOME/.config/eww/widgets/images/music.png"
+
+## Use playerctl if available and a player is active
+get_active_player() {
+    playerctl -l 2>/dev/null | head -n 1
+}
+
+use_playerctl=false
+active_player=$(get_active_player)
+if [[ -n "$active_player" ]]; then
+    use_playerctl=true
+fi
+
+## Functions using playerctl
+get_status_playerctl() {
+    status=$(playerctl status 2>/dev/null)
+    [[ "$status" == "Playing" ]] && echo "" || echo "喇"
+}
+
+get_song_playerctl() {
+    playerctl metadata title 2>/dev/null || echo "Offline"
+}
+
+get_artist_playerctl() {
+    playerctl metadata artist 2>/dev/null || echo "Offline"
+}
+
+get_time_playerctl() {
+    # Returns percent of playback
+    playerctl position 2>/dev/null | awk '{printf "%d", $1}'
+}
+
+get_ctime_playerctl() {
+    position=$(playerctl position 2>/dev/null)
+    date -u -d "@${position%.*}" +"%M:%S" 2>/dev/null || echo "0:00"
+}
+
+get_ttime_playerctl() {
+    duration=$(playerctl metadata mpris:length 2>/dev/null)
+    if [[ -n "$duration" ]]; then
+        secs=$((duration / 1000000))
+        date -u -d "@$secs" +"%M:%S"
+    else
+        echo "0:00"
+    fi
+}
+
+get_cover_playerctl() {
+    echo "$FALLBACK_COVER"
+}
+
+## Fallback functions using mpc
+get_status_mpc() {
+    [[ "$(mpc status)" == *"[playing]"* ]] && echo "" || echo "喇"
+}
+
+get_song_mpc() {
+    mpc -f %title% current | sed -e 's/^$/Offline/'
+}
+
+get_artist_mpc() {
+    mpc -f %artist% current | sed -e 's/^$/Offline/'
+}
+
+get_time_mpc() {
+    mpc status | grep "%)" | awk '{print $4}' | tr -d '(%)' || echo "0"
+}
+
+get_ctime_mpc() {
+    mpc status | grep "#" | awk '{print $3}' | sed 's|/.*||g' || echo "0:00"
+}
+
+get_ttime_mpc() {
+    mpc -f %time% current | sed -e 's/^$/0:00/'
+}
+
+get_cover_mpc() {
+    MUSIC_DIR="$HOME/Music"
+    ffmpeg -i "${MUSIC_DIR}/$(mpc current -f %file%)" "$COVER" -y &>/dev/null
+    [[ $? -eq 0 ]] && echo "$COVER" || echo "$FALLBACK_COVER"
+}
+
+## Control
+toggle() {
+    $use_playerctl && playerctl play-pause || mpc -q toggle
+}
+
+next() {
+    $use_playerctl && playerctl next || mpc -q next
+}
+
+prev() {
+    $use_playerctl && playerctl previous || mpc -q prev
+}
+
+## Dispatch by arg
+case "$1" in
+    --song)     $use_playerctl && get_song_playerctl || get_song_mpc ;;
+    --artist)   $use_playerctl && get_artist_playerctl || get_artist_mpc ;;
+    --status)   $use_playerctl && get_status_playerctl || get_status_mpc ;;
+    --time)     $use_playerctl && get_time_playerctl || get_time_mpc ;;
+    --ctime)    $use_playerctl && get_ctime_playerctl || get_ctime_mpc ;;
+    --ttime)    $use_playerctl && get_ttime_playerctl || get_ttime_mpc ;;
+    --cover)    $use_playerctl && get_cover_playerctl || get_cover_mpc ;;
+    --toggle)   toggle ;;
+    --next)     next ;;
+    --prev)     prev ;;
+    *)          echo "Unknown argument" ;;
+esac

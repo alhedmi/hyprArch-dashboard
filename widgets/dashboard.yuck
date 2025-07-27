@@ -1,0 +1,68 @@
+;; POLLS
+(defpoll uptime :interval "10s" "uptime -p")
+(defpoll cpu :interval "5s" "top -bn1 | grep 'Cpu(s)' | awk '{print $2 \"%\"}'")
+(defpoll ram :interval "5s" "free -h | awk '/Mem:/ {print $3\"/\"$2}'")
+(defpoll disk :interval "30s" "df -h / | awk 'NR==2 {print $3\"/\"$2}'")
+(defpoll long_date :interval "60s" "date +\"%A, %d %B\"")
+(defpoll short_time :interval "10s" "date +\"%H:%M\"")
+
+;; MAIN DASHBOARD WIDGET
+(defwidget dashboard []
+  (box :orientation "vertical" :class "dashboard-wrapper" 
+    :orientation "vertical"
+    :spacing 20
+    :halign "fill"
+    :valign "fill"
+    :hexpand true
+    :vexpand true
+    ;; -------------------------------
+    ;; System Info Card
+    ;; -------------------------------
+    (box :orientation "vertical" :class "card"
+      (label :class "label-title" :text "󰍛  System Info")
+      (label :class "label-info" :text "󰔚  Uptime: ${uptime}")
+      (label :class "label-info" :text "󰘚  CPU: ${cpu}")
+      (label :class "label-info" :text "  RAM: ${ram}")
+      (label :class "label-info" :text "󰋊  Disk: ${disk}")
+    )
+
+    ;; -------------------------------
+    ;; Now Playing Card
+    ;; -------------------------------
+    (box :orientation "vertical" :class "card"
+      (label :class "label-title" :text "  Now Playing")
+      (label :class "label-info" :text "󰲸  Title: [Not Playing]")
+      (label :class "label-info" :text "󰎈  Artist: -")
+    )
+
+    ;; -------------------------------
+    ;; To-do List Card
+    ;; -------------------------------
+    (box :orientation "vertical" :class "card"
+      (label :class "label-title" :text "󰄬  To-do List")
+      (label :class "label-info" :text "• Hook up system info")
+      (label :class "label-info" :text "• Add weather widget")
+      (label :class "label-info" :text "• Design music player")
+      (label :class "label-info" :text "• Improve animations")
+    )
+
+    ;; -------------------------------
+    ;; Calendar Card
+    ;; -------------------------------
+    (box :orientation "vertical" :class "card"
+      (label :class "label-title" :text "  Calendar")
+      (label :class "label-info" :text "Today: ${long_date}")
+      (label :class "label-info" :text "Time: ${short_time}")
+    )
+  )
+)
+
+;; WINDOW
+(defwindow dashboard
+  :monitor 0
+  :geometry (geometry :x "0%" :y "0%" :width "33%" :height "100%")
+  :stacking "overlay"
+  :exclusive true
+  :focusable false
+  (dashboard)
+)

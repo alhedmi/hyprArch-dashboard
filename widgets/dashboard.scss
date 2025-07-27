@@ -1,0 +1,28 @@
+
+.dashboard-wrapper {
+  padding: 20px;
+  background: rgba(30, 30, 40, 0.1);
+  border-radius: 16px;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  color: #eeeeee;
+}
+
+.card {
+  background: rgba(20, 20, 30, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.label-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #d4bfff;
+  margin-bottom: 8px;
+}
+
+.label-info {
+  font-size: 12px;
+  color: #b0b0b0;
+  margin-left: 4px;
+}
