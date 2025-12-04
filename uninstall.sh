@@ -13,7 +13,7 @@ FILES_TO_REMOVE=(
 )
 
 # Remove specific files
-echo "[Uninstall] Removing Aurora Dashboard files..."
+echo "[Uninstall] Removing hyprArch Dashboard files..."
 for file in "${FILES_TO_REMOVE[@]}"; do
   if [ -e "$file" ]; then
     echo "[Uninstall] Deleting $file"
@@ -37,4 +37,4 @@ if [ -f "$MAIN_SCSS" ]; then
   sed -i '/@import "\.\/eww-dashboard";/d' "$MAIN_SCSS"
 fi
 
-echo "[Uninstall] Done. Aurora Dashboard files and config references removed."
+echo "[Uninstall] Done. hyprArch Dashboard files and config references removed."
