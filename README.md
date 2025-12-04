@@ -10,5 +10,6 @@ Displays system metrics, Git status, calendar, to-do list, and music controls.
 - `toggle_dashboard.sh`: Script to toggle dashboard/workbench view
 
 
-## Install
-just use the install.sh script, if you encounter symlink problems uninstall everthing and use the install-cpy.sh script instead.
+## Installation
+
+To install, run the install.sh script. If you encounter symlink issues, please uninstall all components and use the install-cpy.sh script instead.
