@@ -38,7 +38,7 @@ IMAGES_DEST_DIR="$CONFIG_DIR/widgets/images"
 ICONS_SRC_DIR="$REPO_DIR/widgets/images/icons"
 ICONS_DEST_DIR="$CONFIG_DIR/widgets/images/icons"
 
-echo "[Install] Installing Aurora Dashboard..."
+echo "[Install] Installing hyprArch Dashboard..."
 
 mkdir -p "$CONFIG_DIR/widgets"
 mkdir -p "$SCRIPTS_DEST_DIR"
