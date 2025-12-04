@@ -1,4 +1,4 @@
-# Aurora Dashboard
+# hyprArch Dashboard
 
 A custom Hyprland dashboard built using Eww, Bash, and Wayland tools.  
 Displays system metrics, Git status, calendar, to-do list, and music controls.
