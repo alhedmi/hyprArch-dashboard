@@ -12,8 +12,8 @@ Displays system metrics, Git status, calendar, to-do list, and music controls.
 
 ## Installation
 
-To install, run the install.sh script. If you encounter symlink issues, please uninstall all components and use the install-cpy.sh script instead.
+To install, run the `install.sh` script. If you encounter symlink issues, please uninstall all components and use the `install-cpy.sh` script instead.
 
 
 ## Usage 
-Execute the toggle_dashboard.sh script directly or assign the command ./toggle_dashboard.sh to a keyboard shortcut, such as SUPER+G.
+Execute the `toggle_dashboard.sh` script directly or assign the command `./toggle_dashboard.sh` to a keyboard shortcut, such as `SUPER+G`.
