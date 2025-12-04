@@ -143,4 +143,4 @@ if ! grep -qF "eww-dashboard.scss" "$MAIN_SCSS"; then
     echo '@import "./eww-dashboard";' >> "$MAIN_SCSS"
 fi
 
-echo "[Install] Aurora Dashboard installed and linked. Main configs only appended once."
+echo "[Install] hyprArch Dashboard installed and linked. Main configs only appended once."
