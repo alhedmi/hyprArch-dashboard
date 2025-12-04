@@ -99,7 +99,7 @@ stop-eww() {
 
 # Toggle logic
 if pgrep -x "eww" > /dev/null && eww list-windows | grep -q "uptime"; then
-  notify-send "Aurora Dashboard" "Closing dashboard..."
+  notify-send "hyprArch Dashboard" "Closing dashboard..."
   echo "[Dashboard Toggle] Closing dashboard"
 
   # eww close "$DASHBOARD_WIDGET"
