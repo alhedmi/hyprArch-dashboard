@@ -24,7 +24,7 @@ WIDGETS_DEST_DIR="$CONFIG_DIR/widgets"
 # Helper Scripts
 SCRIPTS_SRC_DIR="$REPO_DIR/eww/scripts"
 SCRIPTS_DEST_DIR="$CONFIG_DIR/scripts"
-echo "[Install] Installing Aurora Dashboard with file copies..."
+echo "[Install] Installing hyprArch Dashboard with file copies..."
 
 mkdir -p "$CONFIG_DIR"
 
@@ -99,4 +99,4 @@ else
   echo "[Install] No scripts directory found at $SCRIPTS_SRC_DIR, skipping."
 fi
 
-echo "[Install] Aurora Dashboard installed using copies. Main configs only appended once."
+echo "[Install] hyprArch Dashboard installed using copies. Main configs only appended once."
