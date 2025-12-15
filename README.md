@@ -1,5 +1,5 @@
 # hyprArch Dashboard
-
+> ⚠️ This Repo is still under development and is incomplete!
 A custom Hyprland dashboard built using Eww, Bash, and Wayland tools.  
 Displays system metrics, Git status, calendar, to-do list, and music controls.
 
